@@ -134,29 +134,32 @@ document.getElementById('renderBtn').addEventListener('click', () => {
     }
 });
 
-// ---- Copy XML to clipboard ----
+// ---- Copy XML — show in modal for manual copy ----
 document.getElementById('copyXmlBtn').addEventListener('click', () => {
     const csv = document.getElementById('csvInput').value.trim();
     if (!csv) { alert('No CSV data to convert.'); return; }
 
     try {
         const xml = buildDiagram(csv);
-        navigator.clipboard.writeText(xml).then(() => {
-            const btn = document.getElementById('copyXmlBtn');
-            btn.textContent = '✅ Copied!';
-            setTimeout(() => { btn.textContent = '📋 Copy XML'; }, 2000);
-        }).catch(() => {
-            // Fallback for non-HTTPS contexts
-            const ta = document.createElement('textarea');
-            ta.value = xml; document.body.appendChild(ta);
-            ta.select(); document.execCommand('copy');
-            document.body.removeChild(ta);
-            const btn = document.getElementById('copyXmlBtn');
-            btn.textContent = '✅ Copied!';
-            setTimeout(() => { btn.textContent = '📋 Copy XML'; }, 2000);
-        });
+        const modal = document.getElementById('xmlModal');
+        const output = document.getElementById('xmlOutput');
+        output.value = xml;
+        modal.style.display = 'flex';
+        // Auto-select all text so user just hits Ctrl+C
+        output.focus();
+        output.select();
     } catch (err) {
         alert('Error: ' + err.message);
+    }
+});
+
+// ---- Close modal ----
+document.getElementById('closeModal').addEventListener('click', () => {
+    document.getElementById('xmlModal').style.display = 'none';
+});
+document.getElementById('xmlModal').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) {
+        document.getElementById('xmlModal').style.display = 'none';
     }
 });
 
