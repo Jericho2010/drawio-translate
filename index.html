@@ -15,21 +15,21 @@
 
     <div class="container">
         <div class="left-pane">
-            <textarea id="csvInput">id,name,parent,type,connects_to,step_number
-1,Data source 1: Fare data,,data_source,3,1
-2,Data source 2: Trip data,,data_source,4,1
-3,Event Hubs,10,event_hubs,5,2
-4,Event Hubs,10,event_hubs,5,2
-5,Azure Databricks,11,databricks,7,3
-6,Data source 3: Neighborhood data,11,data_source,5,
-7,Azure Cosmos DB,12,cosmos_db,8,4
-8,PowerBI,13,powerbi,,
-9,Azure Monitor,,azure_monitor,14,5
+            <textarea id="csvInput">id,name,parent,type,receives_from,step_number
 10,Ingest,,phase,,
 11,Process,,phase,,
 12,Store,,phase,,
 13,Analyze/Report,,phase,,
-14,Dashboard,,dashboard,,</textarea>
+1,Data source 1: Fare data,,data_source,,
+2,Data source 2: Trip data,,data_source,,
+3,Event Hubs,10,event_hubs,1,1
+4,Event Hubs,10,event_hubs,2,1
+5,Azure Databricks,11,databricks,3,2
+6,Data source 3: Neighborhood data,11,data_source,,
+7,Azure Cosmos DB,12,cosmos_db,5,3
+8,PowerBI,13,powerbi,7,4
+9,Azure Monitor,,azure_monitor,5,5
+14,Dashboard,,dashboard,9,</textarea>
         </div>
         <div class="right-pane">
             <!-- Draw.io embedded iframe -->

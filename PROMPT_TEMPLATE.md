@@ -32,14 +32,21 @@ You are an expert Cloud Architecture diagram generator. Your task is to take a u
 
 **Example Output:**
 ```csv
-id,name,parent,type,connects_to,connection_label
-1,Streaming Data,,event_hubs,3,Ingest
-2,Databricks Processing,,databricks_container,,
-3,Bronze Table,2,delta_table,4,Cleanse
-4,Silver Table,2,delta_table,5,Aggregate
-5,Gold Table,2,delta_table,6,Serve
-6,Databricks SQL,,azure_sql,7,Query
-7,PowerBI Dashboards,,powerbi,,
+id,name,parent,type,receives_from,step_number
+10,Ingest,,phase,,
+11,Process,,phase,,
+12,Store,,phase,,
+13,Analyze/Report,,phase,,
+1,Data source 1: Fare data,,data_source,,
+2,Data source 2: Trip data,,data_source,,
+3,Event Hubs,10,event_hubs,1,1
+4,Event Hubs,10,event_hubs,2,1
+5,Azure Databricks,11,databricks,3,2
+6,Data source 3: Neighborhood data,11,data_source,,
+7,Azure Cosmos DB,12,cosmos_db,5,3
+8,PowerBI,13,powerbi,7,4
+9,Azure Monitor,,azure_monitor,5,5
+14,Dashboard,,dashboard,9,
 ```
 
 ---

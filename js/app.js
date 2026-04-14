@@ -52,11 +52,22 @@ document.getElementById('renderBtn').addEventListener('click', () => {
         
         let cols = line.split(',');
         let typeVal = cols[3] ? cols[3].trim().toLowerCase() : '';
+        let stepVal = cols[5] ? cols[5].trim() : '';
+        let nameVal = cols[1] || '';
         
         let mappedNode = STENCILS[typeVal] || STENCILS['default'];
         
-        // Push the augmented row
-        newDataRows.push(line + ',' + mappedNode.style + ',' + mappedNode.w + ',' + mappedNode.h);
+        // Inject green circular badging dynamically if a step number exists
+        if (stepVal) {
+            nameVal = `<div style="position:absolute;top:0px;left:0px;background:#107c41;color:#fff;border-radius:10px;width:20px;height:20px;text-align:center;font-size:12px;font-weight:bold;line-height:20px;box-shadow:0 1px 3px rgba(0,0,0,0.3);z-index:99;">${stepVal}</div>` + nameVal;
+        }
+
+        // Push the augmented row (rebuilding line to inject the new injected HTML name)
+        let newCols = [...cols];
+        newCols[1] = `"${nameVal.replace(/"/g, '""')}"`; // Safely quote the HTML
+        let newLine = newCols.join(',');
+
+        newDataRows.push(newLine + ',' + mappedNode.style + ',' + mappedNode.w + ',' + mappedNode.h);
     }
 
     // Dynamic edge labels using step_number to create green circular numbered badges
@@ -65,7 +76,7 @@ document.getElementById('renderBtn').addEventListener('click', () => {
 # width: @width
 # height: @height
 # parent: %parent%
-# connect: {"from": "connects_to", "to": "id", "invert": true, "label": "%step_number%", "style": "edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#111111;strokeWidth=1.5;labelBackgroundColor=#107c41;fontColor=#ffffff;fontStyle=1;"}
+# connect: {"from": "receives_from", "to": "id", "style": "edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#111111;strokeWidth=1.5;"}
 # layout: horizontalflow
 # nodespacing: 80
 # levelspacing: 120
