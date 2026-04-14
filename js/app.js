@@ -122,7 +122,7 @@ document.getElementById('renderBtn').addEventListener('click', () => {
 
     try {
         const xml = buildDiagram(csv);
-        console.log('Generated XML:\n', xml);
+        console.log('Generated XML:', xml);
         iframe.contentWindow.postMessage(JSON.stringify({
             action: 'load',
             autosave: 1,
@@ -192,7 +192,8 @@ document.getElementById('downloadBtn').addEventListener('click', () => {
 // ============================================================
 function buildDiagram(csvText) {
     // --- 1. Parse CSV ---
-    const lines = csvText.split('\n').filter(l => l.trim());
+    const NL = String.fromCharCode(10);
+    const lines = csvText.split(NL).filter(l => l.trim());
     const hdrs = lines[0].split(',').map(h => h.trim());
     const idx = name => hdrs.indexOf(name);
 
