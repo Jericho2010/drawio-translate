@@ -1,15 +1,16 @@
 const STENCILS = {
-    'event_hubs': 'image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=https://app.diagrams.net/img/lib/azure2/internet_of_things/Event_Hubs.svg;',
-    'databricks': 'image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=https://app.diagrams.net/img/lib/azure2/analytics/Azure_Databricks.svg;',
-    'adls': 'image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=https://app.diagrams.net/img/lib/azure2/storage/Storage_Accounts.svg;',
-    'powerbi': 'image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=https://app.diagrams.net/img/lib/azure2/other/Power_BI_Logo.svg;',
-    'azure_sql': 'image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=https://app.diagrams.net/img/lib/azure2/databases/SQL_Databases.svg;',
-    'cosmos_db': 'image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=https://app.diagrams.net/img/lib/azure2/databases/Azure_Cosmos_DB.svg;',
-    'web_app': 'image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=https://app.diagrams.net/img/lib/azure2/app_services/App_Services.svg;',
-    'delta_table': 'shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#dae8fc;strokeColor=#6c8ebf;',
-    'container': 'swimlane;whiteSpace=wrap;html=1;startSize=20;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;',
-    'user': 'shape=actor;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;',
-    'default': 'rounded=1;whiteSpace=wrap;html=1;'
+    'event_hubs': 'image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=https://raw.githubusercontent.com/jgraph/drawio/master/src/main/webapp/img/lib/azure2/iot/Event_Hubs.svg;',
+    'databricks': 'image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=https://raw.githubusercontent.com/jgraph/drawio/master/src/main/webapp/img/lib/azure2/analytics/Azure_Databricks.svg;',
+    'databricks_container': 'swimlane;whiteSpace=wrap;html=1;startSize=30;fillColor=#ffffff;strokeColor=#f3722c;fontColor=#333333;fontStyle=1;dashed=1;shadow=1;spacingLeft=10;swimlaneLine=1;',
+    'adls': 'image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=https://raw.githubusercontent.com/jgraph/drawio/master/src/main/webapp/img/lib/azure2/storage/Data_Lake_Storage.svg;',
+    'powerbi': 'image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=https://raw.githubusercontent.com/jgraph/drawio/master/src/main/webapp/img/lib/azure2/power_platform/PowerBI.svg;',
+    'azure_sql': 'image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=https://raw.githubusercontent.com/jgraph/drawio/master/src/main/webapp/img/lib/azure2/databases/SQL_Database.svg;',
+    'cosmos_db': 'image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=https://raw.githubusercontent.com/jgraph/drawio/master/src/main/webapp/img/lib/azure2/databases/Azure_Cosmos_DB.svg;',
+    'web_app': 'image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=https://raw.githubusercontent.com/jgraph/drawio/master/src/main/webapp/img/lib/azure2/app_services/App_Services.svg;',
+    'delta_table': 'shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#f8f9fa;strokeColor=#0050ef;fontColor=#111111;fontStyle=1;shadow=1;',
+    'container': 'swimlane;whiteSpace=wrap;html=1;startSize=30;fillColor=#ffffff;fontColor=#333333;strokeColor=#555555;dashed=1;shadow=1;',
+    'user': 'shape=actor;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#333333;fontColor=#333333;shadow=1;',
+    'default': 'rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#a6a6a6;fontColor=#333333;shadow=1;'
 };
 
 const iframe = document.getElementById('drawio-iframe');
@@ -76,12 +77,12 @@ document.getElementById('renderBtn').addEventListener('click', () => {
 let drawioConfig = `# label: %name%
 # style: %style%
 # parent: %parent%
-# connect: {"from": "connects_to", "to": "id", "invert": true, "label": "%connection_label%", "style": "edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;"}
+# connect: {"from": "connects_to", "to": "id", "invert": true, "style": "edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#666666;strokeWidth=2;"}
 # layout: auto
-# nodespacing: 60
-# levelspacing: 100
-# edgespacing: 40
-# padding: 15
+# nodespacing: 70
+# levelspacing: 120
+# edgespacing: 50
+# padding: 25
 ## CSV Data begins
 `;
 
