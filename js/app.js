@@ -77,7 +77,7 @@ document.getElementById('renderBtn').addEventListener('click', () => {
 # height: @height
 # parent: %parent%
 # connect: {"from": "receives_from", "to": "id", "style": "edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#111111;strokeWidth=1.5;"}
-# layout: horizontalflow
+# layout: auto
 # nodespacing: 80
 # levelspacing: 120
 # edgespacing: 40
