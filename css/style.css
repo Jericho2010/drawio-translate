@@ -54,6 +54,24 @@ header p {
     background-color: #005a9e;
 }
 
+#copyXmlBtn, #downloadBtn {
+    background-color: #fff;
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+    margin-right: 8px;
+}
+
+#copyXmlBtn:hover, #downloadBtn:hover {
+    background-color: var(--accent-color);
+    color: #fff;
+}
+
 .container {
     display: flex;
     flex-grow: 1;
