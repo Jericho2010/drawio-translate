@@ -93,11 +93,24 @@ window.addEventListener('message', function(evt) {
             const msg = JSON.parse(evt.data);
             if (msg.event === 'init') {
                 iframeReady = true;
-                console.log('Draw.io iframe ready');
+                console.log('Draw.io iframe ready (init event received)');
+                document.getElementById('renderBtn').textContent = 'Render Diagram';
             }
         } catch (e) {}
     }
 });
+
+// Fallback: if init event not received after 12s, force ready
+setTimeout(() => {
+    if (!iframeReady) {
+        console.warn('Draw.io init timeout — forcing ready state');
+        iframeReady = true;
+        document.getElementById('renderBtn').textContent = 'Render Diagram';
+    }
+}, 12000);
+
+// Show loading state on button
+document.getElementById('renderBtn').textContent = 'Loading Draw.io...';
 
 document.getElementById('renderBtn').addEventListener('click', () => {
     if (!iframeReady) {
