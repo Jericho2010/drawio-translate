@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlowArchitect: LLM to Draw.io</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>FlowArchitect</h1>
+        <p>Paste your LLM-generated CSV to render a Draw.io architecture diagram.</p>
+        <button id="renderBtn">Render Diagram</button>
+    </header>
+
+    <div class="container">
+        <div class="left-pane">
+            <textarea id="csvInput" placeholder="Paste CSV here...
+id,name,parent,type,connects_to,connection_label
+1,Event Hubs,,event_hubs..."></textarea>
+        </div>
+        <div class="right-pane">
+            <!-- Draw.io embedded iframe -->
+            <iframe id="drawio-iframe" src="https://embed.diagrams.net/?embed=1&ui=min&spin=1&proto=json" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
