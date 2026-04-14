@@ -4,3 +4,5 @@ node_modules/
 *.log
 test_xml.js
 test_output.drawio
+FlowArchitect_v2.html
+test_gemini.drawio
