@@ -1,5 +1,5 @@
 // ========================================================
-// FlowArchitect - XML Generation Engine
+// FlowArchitect - XML Generation Engine v2
 // ========================================================
 // Generates mxGraph XML with precise x,y positioning.
 // No reliance on Draw.io's auto-layout.
@@ -7,43 +7,65 @@
 
 const ICON_BASE = 'https://raw.githubusercontent.com/jgraph/drawio/master/src/main/webapp/img/lib/';
 
+const imgStyle = (path) =>
+    'image;html=1;image=' + ICON_BASE + path + ';verticalLabelPosition=bottom;verticalAlign=top;align=center;fontSize=11;fontColor=#333333;';
+
 const STENCILS = {
+    // ---- Structural ----
+    'zone': {
+        style: 'rounded=1;whiteSpace=wrap;html=1;fillColor=#E6F2E6;strokeColor=#82b366;fontColor=#333333;fontSize=11;fontStyle=1;verticalAlign=top;spacingTop=5;',
+        w: 'auto', h: 'auto'
+    },
+    'zone_blue': {
+        style: 'rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6c8ebf;fontColor=#333333;fontSize=11;fontStyle=1;verticalAlign=top;spacingTop=5;',
+        w: 'auto', h: 'auto'
+    },
+    'governance_bar': {
+        style: 'rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#cccccc;fontColor=#333333;fontSize=10;fontStyle=0;align=center;verticalAlign=middle;',
+        w: 'auto', h: 35
+    },
+    // ---- Data Sources ----
     'data_source': {
         style: 'rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#333333;fontSize=11;align=center;verticalAlign=middle;',
-        w: 140, h: 50
+        w: 120, h: 45
     },
-    'event_hubs': {
-        style: 'image;html=1;image=' + ICON_BASE + 'azure2/iot/Event_Hubs.svg;verticalLabelPosition=bottom;verticalAlign=top;align=center;fontSize=11;fontColor=#333333;',
-        w: 50, h: 50
+    // ---- Azure Services ----
+    'adf':            { style: imgStyle('azure2/databases/Data_Factory.svg'),                  w: 48, h: 48 },
+    'databricks':     { style: imgStyle('azure2/analytics/Azure_Databricks.svg'),              w: 48, h: 55 },
+    'event_hubs':     { style: imgStyle('azure2/iot/Event_Hubs.svg'),                          w: 48, h: 48 },
+    'cosmos_db':      { style: imgStyle('azure2/databases/Azure_Cosmos_DB.svg'),               w: 48, h: 48 },
+    'azure_sql':      { style: imgStyle('azure2/databases/SQL_Database.svg'),                  w: 48, h: 48 },
+    'powerbi':        { style: imgStyle('azure2/power_platform/PowerBI.svg'),                  w: 48, h: 55 },
+    'synapse':        { style: imgStyle('azure2/analytics/Azure_Synapse_Analytics.svg'),       w: 48, h: 48 },
+    'stream_analytics': { style: imgStyle('azure2/analytics/Stream_Analytics_Jobs.svg'),       w: 48, h: 48 },
+    'purview':        { style: imgStyle('azure2/databases/Azure_Purview_Accounts.svg'),        w: 48, h: 48 },
+    'data_catalog':   { style: imgStyle('azure2/integration/Azure_Data_Catalog.svg'),          w: 48, h: 48 },
+    'adls':           { style: imgStyle('azure2/storage/Data_Lake_Storage_Gen1.svg'),          w: 48, h: 48 },
+    'azure_monitor':  { style: imgStyle('azure2/management_governance/Monitor.svg'),           w: 48, h: 48 },
+    'web_app':        { style: imgStyle('azure2/app_services/App_Services.svg'),               w: 48, h: 48 },
+    // ---- Storage layers ----
+    'bronze_layer': {
+        style: 'rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontColor=#333333;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;',
+        w: 120, h: 45
     },
-    'databricks': {
-        style: 'image;html=1;image=' + ICON_BASE + 'azure2/analytics/Azure_Databricks.svg;verticalLabelPosition=bottom;verticalAlign=top;align=center;fontSize=11;fontColor=#333333;',
-        w: 50, h: 60
+    'silver_layer': {
+        style: 'rounded=1;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#9673A6;fontColor=#333333;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;',
+        w: 120, h: 45
     },
-    'cosmos_db': {
-        style: 'image;html=1;image=' + ICON_BASE + 'azure2/databases/Azure_Cosmos_DB.svg;verticalLabelPosition=bottom;verticalAlign=top;align=center;fontSize=11;fontColor=#333333;',
-        w: 60, h: 60
+    'gold_layer': {
+        style: 'rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontColor=#333333;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;',
+        w: 120, h: 45
     },
-    'azure_sql': {
-        style: 'image;html=1;image=' + ICON_BASE + 'azure2/databases/SQL_Database.svg;verticalLabelPosition=bottom;verticalAlign=top;align=center;fontSize=11;fontColor=#333333;',
-        w: 50, h: 60
+    // ---- Tools (no Azure icon) ----
+    'tool': {
+        style: 'rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontColor=#333333;fontSize=10;align=center;verticalAlign=middle;',
+        w: 70, h: 35
     },
-    'powerbi': {
-        style: 'image;html=1;image=' + ICON_BASE + 'azure2/power_platform/PowerBI.svg;verticalLabelPosition=bottom;verticalAlign=top;align=center;fontSize=11;fontColor=#333333;',
-        w: 50, h: 60
+    'consumer': {
+        style: 'rounded=1;whiteSpace=wrap;html=1;fillColor=#f0f0f0;strokeColor=#999999;fontColor=#333333;fontSize=10;align=center;verticalAlign=middle;',
+        w: 130, h: 40
     },
-    'azure_monitor': {
-        style: 'image;html=1;image=' + ICON_BASE + 'azure2/management_governance/Monitor.svg;verticalLabelPosition=bottom;verticalAlign=top;align=center;fontSize=11;fontColor=#333333;',
-        w: 50, h: 50
-    },
-    'adls': {
-        style: 'image;html=1;image=' + ICON_BASE + 'azure2/storage/Data_Lake_Storage_Gen1.svg;verticalLabelPosition=bottom;verticalAlign=top;align=center;fontSize=11;fontColor=#333333;',
-        w: 50, h: 50
-    },
-    'dashboard': {
-        style: 'rounded=0;whiteSpace=wrap;html=1;fillColor=#e8e8e8;strokeColor=#333333;fontColor=#333333;fontSize=11;align=center;verticalAlign=middle;',
-        w: 80, h: 50
-    },
+    // ---- Fallback ----
     'default': {
         style: 'rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#a6a6a6;fontColor=#333333;fontSize=11;',
         w: 120, h: 50
@@ -53,12 +75,12 @@ const STENCILS = {
 // Layout constants (pixels)
 const L = {
     leftMargin: 30,
-    sourceColW: 160,   // width for the source column (col -1)
-    phaseColW: 170,    // width per phase column
+    sourceColW: 140,   // width for the source column (col -1)
+    phaseColW: 155,    // width per phase column
     headerY: 10,       // y of phase header labels
-    headerH: 30,       // height of header labels
-    contentY: 55,      // y start for first content row
-    rowH: 120          // vertical spacing between rows
+    headerH: 28,       // height of header labels
+    contentY: 50,      // y start for first content row
+    rowH: 100          // vertical spacing between rows
 };
 
 // ---- Draw.io iframe communication ----
@@ -90,7 +112,7 @@ document.getElementById('renderBtn').addEventListener('click', () => {
         console.log('Generated XML:\n', xml);
         iframe.contentWindow.postMessage(JSON.stringify({
             action: 'load',
-            autosave: 0,
+            autosave: 1,
             xml: xml
         }), '*');
     } catch (err) {
@@ -144,9 +166,6 @@ function buildDiagram(csvText) {
     });
 
     // --- 4. Assign columns ---
-    // Phase children → phase's column index
-    // Pure sources (no receives_from, no phase parent) → column -1
-    // Others → topological: max(source columns) + 1
     content.forEach(n => {
         if (n.parent && phaseIdx[n.parent] !== undefined) {
             n._col = phaseIdx[n.parent];
@@ -182,11 +201,23 @@ function buildDiagram(csvText) {
     });
 
     // Align source nodes (col -1) to their target's row
+    // When multiple sources feed the same target, offset them vertically
     if (colBuckets[-1]) {
+        const usedRows = new Set();
         colBuckets[-1].forEach(src => {
             const tgtEdge = edges.find(e => e.from === src.id);
             if (tgtEdge && byId[tgtEdge.to]?._row !== undefined) {
-                src._row = byId[tgtEdge.to]._row;
+                let targetRow = byId[tgtEdge.to]._row;
+                // Find next available row starting from target row
+                while (usedRows.has(targetRow)) targetRow++;
+                src._row = targetRow;
+                usedRows.add(targetRow);
+            } else {
+                // No target edge — keep original row but avoid conflicts
+                let row = src._row;
+                while (usedRows.has(row)) row++;
+                src._row = row;
+                usedRows.add(row);
             }
         });
     }
@@ -194,8 +225,8 @@ function buildDiagram(csvText) {
     // --- 6. Compute pixel positions ---
     content.forEach(n => {
         const st = STENCILS[n.type] || STENCILS['default'];
-        n._w = st.w;
-        n._h = st.h;
+        n._w = (st.w === 'auto') ? 120 : st.w;
+        n._h = (st.h === 'auto') ? 50  : st.h;
 
         if (n._col === -1) {
             n._x = L.leftMargin + (L.sourceColW - n._w) / 2;
@@ -214,7 +245,7 @@ function buildDiagram(csvText) {
     phases.forEach((p, i) => {
         const x = L.leftMargin + L.sourceColW + i * L.phaseColW;
         xml += mxVertex(nid++, esc(p.name),
-            'text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#333333;',
+            'text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#333333;',
             x, L.headerY, L.phaseColW, L.headerH);
     });
 
@@ -236,7 +267,7 @@ function buildDiagram(csvText) {
 
         let style = 'edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#333333;strokeWidth=1.5;';
         if (e.step) {
-            style += 'labelBackgroundColor=#107c41;fontColor=#ffffff;fontSize=12;fontStyle=1;';
+            style += 'labelBackgroundColor=#107c41;fontColor=#ffffff;fontSize=11;fontStyle=1;';
         }
         xml += mxEdge(eid, e.step || '', style, sid, tid);
     });
