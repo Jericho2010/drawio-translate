@@ -19,27 +19,13 @@
         <div class="left-pane">
             <textarea id="csvInput">id,name,parent,type,receives_from,step_number
 100,Ingest,,phase,,
-101,Raw,,phase,,
-102,Transform,,phase,,
-103,Curated,,phase,,
-104,Serve,,phase,,
-105,Consume,,phase,,
-1,Operational Systems,,data_source,,
-2,Landing Zone,,data_source,,
-3,Azure Data Factory,100,adf,1;2,
-4,Bronze Layer (ADLS gen2),101,bronze_layer,3,
-5,Meta Store,101,azure_sql,4,
-6,Azure Databricks,102,databricks,4,
-7,Great Expectations,102,tool,6,
-8,DBT,102,tool,7,
-9,Silver Layer (ADLS gen2),103,silver_layer,6,
-10,Databricks SQL,104,databricks,9,
-11,Real-time Streaming,104,stream_analytics,9,
-12,Microsoft Fabric,104,synapse,10,
-13,Gold Layer / OneLake,105,gold_layer,12,
-14,Event Consumers,105,consumer,11,
-15,PowerBI,105,powerbi,12;13,
-16,Citizen Data Science,105,consumer,13,</textarea>
+101,Process,,phase,,
+1,Event Hubs,100,event_hubs,,1
+2,Process VNet,101,boundary_vnet,,
+3,Databricks Subnet,2,boundary_subnet,,
+4,Storage Subnet,2,boundary_subnet,,
+5,Azure Databricks,3,databricks,1,2
+6,ADLS Gen2,4,adls,5,3</textarea>
         </div>
         <div class="right-pane">
             <!-- Draw.io embedded iframe -->

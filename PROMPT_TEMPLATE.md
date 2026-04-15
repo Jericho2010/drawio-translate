@@ -41,16 +41,28 @@ id,name,parent,type,receives_from,step_number
 | `adf` | Azure Data Factory | Orchestration, ETL ingestion, pipelines |
 | `databricks` | Azure Databricks | Spark processing, notebooks, Databricks SQL |
 | `event_hubs` | Azure Event Hubs | Streaming ingestion, message queuing |
+| `kafka` | Kafka | Streaming, event routing |
 | `cosmos_db` | Azure Cosmos DB | NoSQL database, global distribution |
 | `azure_sql` | Azure SQL Database | Relational database, metastore |
 | `synapse` | Azure Synapse Analytics | Analytics workspace, Microsoft Fabric |
 | `stream_analytics` | Stream Analytics | Real-time stream processing |
 | `adls` | Azure Data Lake Storage | Blob/file storage, data lake |
+| `storage_account`| Storage Account | Blob, file, table, queue storage |
 | `powerbi` | Power BI | Dashboards, reporting, visualization |
 | `purview` | Microsoft Purview | Data governance, cataloging |
 | `data_catalog` | Azure Data Catalog | Unity Catalog, metadata management |
+| `key_vault` | Azure Key Vault | Secrets and keys management |
+| `active_directory`| Microsoft Entra ID | Identity and access management |
 | `azure_monitor` | Azure Monitor | Monitoring, alerting, logging |
 | `web_app` | Azure App Service | Web applications, APIs |
+
+#### Boundaries (Structural Nesting)
+| Type | Style | Use For |
+|---|---|---|
+| `boundary_vnet` | Blue dashed border | Virtual Networks (VNets) |
+| `boundary_subnet` | Solid subtle gray border | Subnets |
+| `boundary_rg` | Solid blue border | Resource Groups |
+| `boundary_generic`| Gray dashed border | Generic logical groupings or zones |
 
 #### Styled Boxes (No Icon, Colored)
 | Type | Color | Use For |
@@ -67,7 +79,10 @@ id,name,parent,type,receives_from,step_number
 The rendering engine uses a **topological left-to-right layout**:
 
 1. **Phases define columns.** List them first in the CSV, in left-to-right order. Each phase becomes a column header.
-2. **`parent` → column placement.** Nodes with a `parent` pointing to a phase ID are placed in that phase's column.
+2. **`parent` → hierarchy & column placement.**
+   - Nodes can belong to a `phase` directly.
+   - OR Nodes can belong to a `boundary_*`, which in turn belongs to a `boundary_*` (nesting) or a `phase`.
+   - The engine automatically calculates bounding boxes for boundaries and positions their children inside them.
 3. **Source nodes (no `receives_from`, no `parent`) go to the far left** as input sources.
 4. **Orphan nodes (no `parent`, but has `receives_from`) are placed automatically** one column right of their source's column.
 5. **Multiple nodes in the same column stack vertically.**
@@ -144,6 +159,24 @@ id,name,parent,type,receives_from,step_number
 2,App Service,100,web_app,1,1
 3,Azure SQL,101,azure_sql,2,2
 4,Azure Monitor,,azure_monitor,2,
+```
+
+---
+
+### EXAMPLE 4: Complex Nested Boundaries
+
+**User input:** "A Virtual Network in the Process phase contains a Databricks subnet (with Databricks) and a Storage subnet (with ADLS). Event hubs feed Databricks, which feeds ADLS."
+
+```csv
+id,name,parent,type,receives_from,step_number
+100,Ingest,,phase,,
+101,Process,,phase,,
+1,Event Hubs,100,event_hubs,,1
+2,Process VNet,101,boundary_vnet,,
+3,Databricks Subnet,2,boundary_subnet,,
+4,Storage Subnet,2,boundary_subnet,,
+5,Azure Databricks,3,databricks,1,2
+6,ADLS Gen2,4,adls,5,3
 ```
 
 ---
