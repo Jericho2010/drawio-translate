@@ -32,14 +32,19 @@ python3 -m http.server 8080
 
 ## Workflow: Using any LLM (e.g., M365 Copilot, Gemini, ChatGPT)
 
-```
-You describe the architecture        │  "Build a lakehouse inside a VNet..."
-        ↓                            │
-LLM generates CSV (via prompt)       │  id,name,parent,type,receives_from...
-        ↓                            │
-FlowArchitect converts CSV → XML     │  <mxGraphModel>...</mxGraphModel>
-        ↓                            │
-Open in Draw.io, adjust spacing      │  Professional diagram in ~2 minutes
+```mermaid
+graph TD
+    Prompt["📄 PROMPT_TEMPLATE.md"] -->|System Instructions| LLM
+    User["👤 User (Describes Architecture)"] --> |"'Build a lakehouse inside a VNet...'"| LLM["🤖 LLM (e.g., M365 Copilot)"]
+    LLM --> |"Generates CSV"| FlowArchitect["⚙️ FlowArchitect_v3.html"]
+    FlowArchitect --> |"<mxGraphModel> XML"| DrawIO["📐 Draw.io (Extras -> Edit Diagram)"]
+    DrawIO --> |"Render/Download"| Done(["✅ Professional Architecture Diagram"])
+
+    style Prompt fill:#f5f5f5,stroke:#999,stroke-width:2px,color:#333
+    style User fill:#E1D5E7,stroke:#9673A6,stroke-width:2px,color:#333
+    style LLM fill:#FFF2CC,stroke:#D6B656,stroke-width:2px,color:#333
+    style FlowArchitect fill:#DAE8FC,stroke:#6C8EBF,stroke-width:2px,color:#333
+    style DrawIO fill:#D5E8D4,stroke:#82B366,stroke-width:2px,color:#333
 ```
 
 1. Copy `PROMPT_TEMPLATE.md` into your LLM of choice (e.g., M365 Copilot).
