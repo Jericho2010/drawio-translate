@@ -36,14 +36,22 @@ python3 -m http.server 8080
 graph TD
     Prompt["📄 PROMPT_TEMPLATE.md"] -->|System Instructions| LLM
     User["👤 User (Describes Architecture)"] --> |"'Build a lakehouse inside a VNet...'"| LLM["🤖 LLM (e.g., M365 Copilot)"]
-    LLM --> |"Generates CSV"| FlowArchitect["⚙️ FlowArchitect_v3.html"]
-    FlowArchitect --> |"<mxGraphModel> XML"| DrawIO["📐 Draw.io (Extras -> Edit Diagram)"]
-    DrawIO --> |"Render/Download"| Done(["✅ Professional Architecture Diagram"])
+    
+    LLM --> |"Generates CSV"| Translator
+
+    subgraph FlowApp ["⚙️ FlowArchitect_v3.html (Portable UI)"]
+        Translator{"CSV → XML<br>Translation Engine"}
+        DrawIO["📐 Embedded Draw.io<br>Iframe Preview"]
+        Translator --> |"Auto-renders XML"| DrawIO
+    end
+    
+    Translator --> |"Export / Download"| Done(["✅ Professional Architecture Diagram (.drawio)"])
 
     style Prompt fill:#f5f5f5,stroke:#999,stroke-width:2px,color:#333
     style User fill:#E1D5E7,stroke:#9673A6,stroke-width:2px,color:#333
     style LLM fill:#FFF2CC,stroke:#D6B656,stroke-width:2px,color:#333
-    style FlowArchitect fill:#DAE8FC,stroke:#6C8EBF,stroke-width:2px,color:#333
+    style FlowApp fill:#f4f5f7,stroke:#0078d4,stroke-width:2px,stroke-dasharray: 5 5,color:#333
+    style Translator fill:#DAE8FC,stroke:#6C8EBF,stroke-width:2px,color:#333
     style DrawIO fill:#D5E8D4,stroke:#82B366,stroke-width:2px,color:#333
 ```
 
