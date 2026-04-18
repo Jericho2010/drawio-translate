@@ -8,13 +8,12 @@
 
 ---
 
-## 🎨 The Interface
+## 🎨 Professional Showcase
 
-![Obsidian Slate UI](docs/showcase_ui.png)
-*FlowArchitect v7.2 Cinematic Interface featuring "Obsidian Slate" glassmorphism.*
-
-![Multi-Cloud Stencils](docs/showcase_stencils.png)
-*High-fidelity rendering of Snowflake and Microsoft Fabric stencils.*
+| **Databricks Medallion Ecosystem** | **Snowflake Data Cloud Ecosystem** |
+| :---: | :---: |
+| ![Databricks Showcase](docs/showcase_databricks.png) | ![Snowflake Showcase](docs/showcase_snowflake.png) |
+| *Automated rendering of DLT pipelines, Serverless Warehouses, and Unity Catalog.* | *High-fidelity mapping of Snowpark, Dynamic Tables, and Horizon Governance.* |
 
 ---
 
