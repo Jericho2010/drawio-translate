@@ -8,12 +8,24 @@
 
 ---
 
+---
+
 ## 🎨 Professional Showcase
 
 | **Databricks Medallion Ecosystem** | **Snowflake Data Cloud Ecosystem** |
 | :---: | :---: |
-| ![Databricks Showcase](docs/showcase_databricks.png) | ![Snowflake Showcase](docs/showcase_snowflake.png) |
+| ![Databricks Showcase](docs/showcase_dbx.png) | ![Snowflake Showcase](docs/showcase_sf.png) |
 | *Automated rendering of DLT pipelines, Serverless Warehouses, and Unity Catalog.* | *High-fidelity mapping of Snowpark, Dynamic Tables, and Horizon Governance.* |
+
+| **Microsoft Fabric & Real-Time Intelligence** | **System Prompt (v2) Interface** |
+| :---: | :---: |
+| ![Fabric Showcase](docs/showcase_fabric.png) | ![Prompt Modal](docs/showcase_prompt.png) |
+| *Native support for KQL Databases, OneLake, and Fabric Eventstreams.* | *One-click access to the latest elite LLM system instructions.* |
+
+| **Diagram XML Export Engine** |
+| :---: |
+| ![XML Modal](docs/showcase_xml.png) |
+| *Instant mxGraph XML generation for seamless Draw.io integration.* |
 
 ---
 
