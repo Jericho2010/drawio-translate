@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const rootDir = '/home/shaun/drawio-translate';
+const rootDir = '/home/shaun/drawio-translate'; // Note: Dir name on disk remains the same for stability
 const appDir = path.join(rootDir, 'app');
 const promptsDir = path.join(rootDir, 'prompts');
 const outputFile = path.join(rootDir, 'FlowArchitect_v7.html');
