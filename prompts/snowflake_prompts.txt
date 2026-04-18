@@ -1,0 +1,37 @@
+#### Snowflake Ecosystem (Extracted)
+| Type | Name |
+|---|---|
+| `sf_data_warehouse` | DATA WAREHOUSE |
+| `sf_collaboration` | COLLABORATION |
+| `sf_data_lake` | DATA LAKE |
+| `sf_unistore` | UNISTORE |
+| `sf_applications` | APPLICATIONS |
+| `sf_ai_ml` | AI/ML |
+| `sf_data_engineering` | DATA ENGINEERING |
+| `sf_iceberg_tables` | Iceberg Tables |
+| `sf_universal_search` | Universal Search |
+| `sf_snowflake_copilot` | Snowflake Copilot |
+| `sf_document_ai` | Document AI |
+| `sf_snowflake_databases` | Snowflake Databases |
+| `sf_snowflake_database` | Snowflake Database |
+| `sf_transactions` | Transactions |
+| `sf_secure_data` | Secure Data |
+| `sf_easy_management` | Easy Management |
+| `sf_management` | Management |
+| `sf_snowpark` | Snowpark |
+| `sf_operating_snowflake` | Operating Snowflake |
+| `sf_server` | Server |
+| `sf_application` | Application |
+| `sf_dev` | Dev |
+| `sf_3rd_party_apps` | 3rd Party Apps |
+| `sf_search` | Search |
+| `sf_mobile` | Mobile |
+| `sf_communicate` | Communicate |
+| `sf_users` | Users |
+| `sf_3rd_party` | 3rd Party |
+| `sf_user` | User |
+| `sf_optimize` | Optimize |
+| `sf_process` | Process |
+| `sf_processes` | Processes |
+| `sf_security` | Security |
+| `sf_accelerated_analytics` | Accelerated Analytics |

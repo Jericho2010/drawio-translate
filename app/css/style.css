@@ -1,0 +1,313 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --bg-dark: #0f172a;
+    --bg-darker: #020617;
+    --bg-glass: rgba(15, 23, 42, 0.85);
+    --border-glass: rgba(255, 255, 255, 0.1);
+    --accent: #38bdf8;
+    --accent-glow: rgba(56, 189, 248, 0.3);
+    --success: #10b981;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #475569;
+    --transition: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) transparent;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-darker);
+    color: var(--text-primary);
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* --- Header --- */
+header {
+    background-color: var(--bg-dark);
+    padding: 0.75rem 2rem;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--border-glass);
+    z-index: 100;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-right: 2rem;
+}
+
+.logo-container img {
+    height: 32px;
+    width: 32px;
+    filter: drop-shadow(0 0 8px var(--accent-glow));
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+header p {
+    margin: 0;
+    flex-grow: 1;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.btn-group {
+    display: flex;
+    gap: 12px;
+}
+
+#copyXmlBtn, #renderBtn {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+#renderBtn {
+    background-color: var(--accent);
+    color: var(--bg-darker);
+    border: none;
+}
+
+#renderBtn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+#copyXmlBtn {
+    background: transparent;
+    color: var(--success);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+#copyXmlBtn:hover {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: var(--success);
+}
+
+/* --- Workflow Stepper (Slim) --- */
+.workflow-stepper {
+    background-color: #020617;
+    padding: 0.75rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-glass);
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    opacity: 0.6;
+    transition: all 0.3s var(--transition);
+    position: relative;
+    flex: 1;
+    cursor: pointer;
+}
+
+.step:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+}
+
+.step-icon {
+    width: 24px;
+    height: 24px;
+    stroke: var(--accent);
+    stroke-width: 1.5;
+    fill: none;
+}
+
+.step-label {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.step-connector {
+    position: absolute;
+    top: 12px;
+    right: -25%;
+    width: 50%;
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+    opacity: 0.2;
+}
+
+.step:last-child .step-connector {
+    display: none;
+}
+
+/* --- Container & Editor --- */
+.container {
+    display: flex;
+    overflow: hidden;
+}
+
+.left-pane {
+    width: 28%;
+    min-width: 300px;
+    background-color: var(--bg-dark);
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--border-glass);
+}
+
+.pane-label {
+    padding: 8px 20px;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    font-weight: 700;
+    border-bottom: 1px solid var(--border-glass);
+}
+
+#csvInput {
+    flex-grow: 1;
+    padding: 1rem;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 13px;
+    border: none;
+    resize: none;
+    background-color: var(--bg-darker);
+    color: var(--accent);
+    outline: none;
+}
+
+.right-pane {
+    flex-grow: 1;
+    background-color: #f8fafc;
+    position: relative;
+}
+
+#drawio-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* --- Cinematic Modal --- */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(2, 6, 23, 0.4);
+    backdrop-filter: blur(25px) saturate(1.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.4s var(--transition);
+}
+
+.modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background: var(--bg-glass);
+    border: 1px solid var(--border-glass);
+    padding: 2.5rem;
+    border-radius: 16px;
+    max-width: 900px;
+    width: 90%;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    transform: translateY(20px);
+    transition: transform 0.4s var(--transition);
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0);
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+}
+
+.modal-content p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+#xmlOutput, #infoBody pre {
+    width: 100%;
+    height: 350px;
+    background: var(--bg-darker);
+    border: 1px solid var(--border-glass);
+    border-radius: 8px;
+    padding: 1.5rem;
+    color: #38bdf8;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    margin: 1.5rem 0;
+    resize: none;
+    outline: none;
+}
+
+#infoBody pre {
+    height: auto;
+    max-height: 400px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+}
+
+.modal-btns {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.modal-btns button {
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#closeModal, #closeInfoModal {
+    background: transparent;
+    border: 1px solid var(--border-glass);
+    color: var(--text-primary);
+}
+
+#infoCopyBtn {
+    background: var(--success);
+    border: none;
+    color: var(--bg-darker);
+}

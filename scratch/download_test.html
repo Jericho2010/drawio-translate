@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Download Test Harness</title>
+</head>
+<body>
+    <h1>Download Test Harness</h1>
+    <p>Testing different download methods in file:/// context.</p>
+    
+    <button id="testV2">Method A (Small Blob - application/xml)</button><br><br>
+    <button id="testV6">Method B (Large Blob - application/xml)</button><br><br>
+    <button id="testDataUri">Method C (Base64 Data URI)</button><br><br>
+    <button id="testOctet">Method D (Octet Stream Blob)</button>
+
+    <script>
+        function triggerDownload(content, filename, type) {
+            const blob = new Blob([content], { type: type });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Method A: Small file (V2 style)
+        document.getElementById('testV2').onclick = () => {
+            triggerDownload('<mxfile>Small XML</mxfile>', 'v2_test.drawio', 'application/xml');
+        };
+
+        // Method B: Large file simulating V6 (~1MB of noise)
+        document.getElementById('testV6').onclick = () => {
+            const bigData = 'A'.repeat(1024 * 1024); // 1MB
+            triggerDownload('<mxfile>' + bigData + '</mxfile>', 'v6_test.drawio', 'application/xml');
+        };
+
+        // Method C: Data URI (Should bypass Blob origin issues)
+        document.getElementById('testDataUri').onclick = () => {
+            const content = '<mxfile>Data URI content</mxfile>';
+            const a = document.createElement('a');
+            a.href = 'data:application/octet-stream;base64,' + btoa(content);
+            a.download = 'datauri_test.drawio';
+            a.click();
+        };
+
+        // Method D: Octet Stream Blob
+        document.getElementById('testOctet').onclick = () => {
+            triggerDownload('<mxfile>Octet content</mxfile>', 'octet_test.drawio', 'application/octet-stream');
+        };
+    </script>
+</body>
+</html>
