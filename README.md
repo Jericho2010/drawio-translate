@@ -1,84 +1,92 @@
-# FlowArchitect
+# FlowArchitect 
 
 > **Conceptualized by [Jericho2010](https://github.com/Jericho2010)**
 >
 > **LLM-generated CSV → Cinematic Architecture Diagrams**
 >
-> *Premium Obsidian-style interface with native multi-cloud stencil support.*
+> *Elite Obsidian-style interface with native multi-cloud stencil support.*
+
+---
+
+## 🎨 The Interface
+
+![Obsidian Slate UI](docs/showcase_ui.png)
+*FlowArchitect v7.2 Cinematic Interface featuring "Obsidian Slate" glassmorphism.*
+
+![Multi-Cloud Stencils](docs/showcase_stencils.png)
+*High-fidelity rendering of Snowflake and Microsoft Fabric stencils.*
 
 ---
 
 ## 🚀 The Core Workflow
 
-FlowArchitect bridges the gap between technical requirements and visual documentation. By leveraging powerful LLMs (Gemini, Claude, GPT-4, M365 Copilot), you can turn a plain-text description into a professional-grade Draw.io diagram in seconds.
+FlowArchitect transforms technical requirements into professional-grade visual documentation via a precise translation layer.
 
-1.  **Copy the Prompt**: Grab the [latest prompt template](prompts/PROMPT_TEMPLATE.md).
-2.  **Describe your Cloud**: Describe your architecture in plain English.
-3.  **Translate**: Paste the LLM's CSV output into the interface.
-4.  **Polish**: Render, Copy XML, and paste directly into [diagrams.net (Draw.io)](https://app.diagrams.net).
+```mermaid
+graph TD
+    User["👤 User (Requirement)"] --> |"'Build a Databricks Medallion architecture...'"| Prompt["📄 PROMPT_TEMPLATE.md"]
+    Prompt --> |"System Guidance"| LLM["🤖 LLM (Gemini/Claude/Copilot)"]
+    LLM --> |"CSV Schema"| FlowApp["⚙️ FlowArchitect (Portable UI)"]
+    
+    subgraph Engine ["Translation Engine"]
+        FlowApp --> |"CSV → mxGraph XML"| Stencils{Stencil Registry}
+        Stencils --> |"Snowflake / Fabric / DBX"| XML["📐 Diagram XML"]
+    end
+    
+    XML --> |"Copy/Paste"| DrawIO["✅ Professional Diagram (.drawio)"]
+    
+    style FlowApp fill:#0f172a,stroke:#38bdf8,stroke-width:2px,color:#fff
+    style LLM fill:#1e293b,stroke:#818cf8,stroke-width:2px,color:#fff
+```
 
 ---
 
 ## 🏛️ Evolution of FlowArchitect
 
-FlowArchitect has evolved from a simple script into a sophisticated architectural design suite.
+### **Phase 1: The Initial Spark (Databricks Medallion)**
+FlowArchitect was born from the need to break technical stasis when visualizing complex **Databricks Lakehouse** architectures. v1–v2 focused on the automated placement of Medallion (Bronze, Silver, Gold) clusters within secure VNet boundaries, eliminating the manual overhead for data engineers.
 
-### **Phase 1: Inception (v1 – v2)**
-The foundational engine was built to take raw CSV data and generate precise `mxGraph` XML. This eliminated the need for manual dragging and dropping by calculating coordinates with a custom grouping logic.
+### **Phase 2: The Multi-Cloud Horizon (Snowflake Ecosystem)**
+As data ecosystems converged, v3–v5 introduced deep integration for the **Snowflake Data Cloud**. This expansion allowed architects to render governed warehouses, Snowpipes, and private links with the same precision as cloud-native resources.
 
-### **Phase 2: The Multi-Cloud Era (v3 – v5)**
-Expansion of the native stencil registries. 
-- **v3**: Introduced **Azure** native shapes and Hierarchical Boundaries (VNets, Subnets).
-- **v4 - v5**: Integrated the **Snowflake** ecosystem, allowing for 1:1 mapping of Snowflake services (Data Engineering, Unistore, etc.) using official native icons.
-
-### **Phase 3: Microsoft Fabric & Premium UI (v6 – v7)**
-The suite transitioned to a high-fidelity "Obsidian Slate" design.
-- **v6**: Major extraction and integration of the **Microsoft Fabric** official icon pack.
-- **v7**: A complete cinematic overhaul. Introduced **Obsidian Slate Glassmorphism**, interactive workflow steppers, full-screen blurred modals, and a single-file portable HTML distribution.
+### **Phase 3: The Cinematic Pinnacle (Microsoft Fabric & Obsidian Slate)**
+With v6–v7, FlowArchitect achieved its current state-of-the-art interface. By integrating the **Microsoft Fabric** official icon pack and adopting the **Obsidian Slate** glassmorphism aesthetic, it transformed from a utility script into a premium "God Mode" drafting suite.
 
 ---
 
-## 📦 Project Organization
+## 📜 Credits & Resource Registry
 
-```text
-drawio-translate/
-├── app/                    # Web Application Source
-│   ├── assets/             # Brand identity (Logo)
-│   ├── css/                # Obsidian Slate Design System
-│   ├── js/                 # Translation engine & logic
-│   │   └── stencils/       # Multi-cloud stencil registries
-│   └── index.html          # Development entry point
-├── prompts/                # LLM System Prompts
-├── releases/               # Legacy versions (v1 - v6)
-├── scripts/                # Build and CI/CD tools
-├── FlowArchitect_v7.html   # THE RELEASE: Portable inlined app
-└── README.md               # You are here
-```
+FlowArchitect is built on the collective intelligence of the architectural community. We explicitly credit and utilize assets from the following sources:
 
----
+### **Databricks**
+*   **Official**: [Databricks High-Level Architecture Documentation](https://docs.databricks.com/en/introduction/high-level-architecture.html).
+*   **Community Stencils**: [nihil0/databricks-drawio-icons](https://github.com/nihil0/databricks-drawio-icons) - Essential Draw.io icon library.
 
-## 📜 Credits & Sources
+### **Snowflake**
+*   **Official**: [Snowflake Brand Assets Library](https://www.snowflake.com/brand-assets/).
+*   **Community Stencils**: [SELECT - Snowflake Drawio Stencils](https://github.com/get-select/snowflake-drawio-stencils) - The definitive Snowflake diagramming pack.
 
-FlowArchitect is built on the shoulders of giants. We utilize official architectural shapes from the following ecosystems:
+### **Microsoft Fabric**
+*   **Official**: [Microsoft Fabric Product & Experience Icons](https://learn.microsoft.com/en-us/fabric/get-started/icons).
+*   **Community Guide**: [Data Guideline - Fabric Icons for Solution Architects](https://dataguideline.com/a-complete-set-of-microsoft-fabric-icons-for-solution-architects/).
+*   **Community Stencils**: [astrzala/FabricToolset](https://github.com/astrzala/FabricToolset) & [marclelijveld/Fabric-Icons](https://github.com/marclelijveld/Fabric-Icons).
 
-*   **Microsoft Fabric & Azure**: Icons derived from the official [Microsoft Fabric Icon Pack](https://learn.microsoft.com/en-us/fabric/get-started/fabric-icon-pack).
-*   **Snowflake**: Stencils extracted from the official Snowflake Asset Library.
-*   **Databricks**: Architecture shapes sourced from official [Databricks Repositories](https://github.com/databricks) and brand guidelines.
-*   **Diagramming Engine**: Built for use with [diagrams.net (Draw.io)](https://app.diagrams.net).
-*   **UI Assets**: Custom-designed SVGs inspired by [Lucide](https://lucide.dev) and [Phosphor Icons](https://phosphoricons.com).
+### **Tooling**
+*   **Engine**: Built for [diagrams.net (Draw.io)](https://app.diagrams.net).
+*   **UI Foundation**: [Lucide Icons](https://lucide.dev) & [Inter Font Family](https://rsms.me/inter/).
 
 ---
 
 ## 🛠️ Build & Installation
 
-To generate the portable version of FlowArchitect:
+To generate the portable release:
 
 ```bash
-# Rebuild the portable HTML
+# Inlines CSS, JS, and Prompts into a single file
 node scripts/build.js
 ```
 
-The resulting `FlowArchitect_v7.html` contains all CSS, JS, and Prompts in a single file, perfect for offline use or sensitive environments where a server is not allowed.
+The resulting **`FlowArchitect_v7.html`** is a standalone, browser-optimized application.
 
 ---
 
